@@ -1,0 +1,23 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "Blog API, major project from The Odin Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "luxon": "^3.4.4",
+    "mongoose": "^8.3.3",
+    "nodemon": "^3.1.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  }
+}
