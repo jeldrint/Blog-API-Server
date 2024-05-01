@@ -6,4 +6,5 @@ npm install express express-session mongoose passport passport-local ejs nodemon
 
 Apr 30
 - 
+* Initial plans / and initial repo
 
