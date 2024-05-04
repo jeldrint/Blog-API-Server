@@ -11,5 +11,9 @@ router.get('/blog-api', (req,res) => {
 })
 
 
+router.get('/blog-api/login', (req,res)=> {
+    res.render('login', {user: res.locals.currentUser})
+})
+
 
 module.exports = router;

@@ -10,6 +10,10 @@ Apr 30
 
 May 4
 - 
-* need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.
+* need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
 
-* I tried connecting to mongoDB, in a cluster, but with a different databases. and I have to specify which database should I connnect to.
+* I tried connecting to mongoDB, in a cluster, but with a different databases. and I have to specify which database should I connnect to.☑️
+
+* Logging in as the admin / blog author
+
+* Sign up for regular accounts
