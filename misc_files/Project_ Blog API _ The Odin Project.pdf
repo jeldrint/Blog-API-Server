@@ -5830,3 +5830,95 @@ trailer
 startxref
 275328
 %%EOF
+43 0 obj
+<</Type/Page/Resources<</ProcSet[/PDF/Text/ImageB/ImageC/ImageI]/ExtGState<</G3 3 0 R>>/Font<</F9 9 0 R/F10 10 0 R/F34 34 0 R/F44 44 0 R/F45 45 0 R>>>>/MediaBox[ 0 0 612 792]/Annots[ 46 0 R 586 0 R 587 0 R 589 0 R 590 0 R 592 0 R 607 0 R 608 0 R 617 0 R 618 0 R 627 0 R 630 0 R 633 0 R 636 0 R]/Contents 47 0 R/StructParents 1/Parent 79 0 R>>
+endobj
+630 0 obj
+<</Type/Annot/Subtype/FreeText/P 43 0 R/F 4/M(D:20240504134111Z00'00)/Contents(siguro need username sa display)/CA 1/CreationDate(D:20240504134105Z00'00)/IT/FreeTextTypewriter/Rotate 0/DA(11.760000 TL /Helv 10.500000 Tf 0 .466667 .831373 rg)/AP<</N 632 0 R>>/Rect[ 197.25 498.15 351.45 510.15]/C[ 0 .466667 .831373]>>
+endobj
+632 0 obj
+<</Length 194/Type/XObject/Subtype/Form/FormType 1/BBox[ 197.25 498.15 351.45 510.15]/Matrix[ 1 0 0 1 -197.25 -498.15]/Resources<</ProcSet[/PDF]/Font<</Helv 593 0 R>>>>>>
+stream
+q
+1 0 0 1 0 0 cm
+197.25 498.15 154.2 12 re
+W
+n
+BT
+/P BMC 
+/Helv 10.500000 Tf 0 .466667 .831373 rg
+197.25 500.7525 Td
+<73696775726F206E65656420757365726E616D6520736120646973706C6179> Tj
+EMC
+ET
+Q
+
+endstream
+endobj
+633 0 obj
+<</Type/Annot/Subtype/FreeText/P 43 0 R/F 4/M(D:20240504134123Z00'00)/Contents(yeah, better)/CA 1/CreationDate(D:20240504134119Z00'00)/IT/FreeTextTypewriter/Rotate 0/DA(11.760000 TL /Helv 10.500000 Tf 0 .466667 .831373 rg)/AP<</N 635 0 R>>/Rect[ 203.85 450.15 259.65 462.15]/C[ 0 .466667 .831373]>>
+endobj
+635 0 obj
+<</Length 155/Type/XObject/Subtype/Form/FormType 1/BBox[ 203.85 450.15 259.65 462.15]/Matrix[ 1 0 0 1 -203.85 -450.15]/Resources<</ProcSet[/PDF]/Font<</Helv 593 0 R>>>>>>
+stream
+q
+1 0 0 1 0 0 cm
+203.85 450.15 55.8 12 re
+W
+n
+BT
+/P BMC 
+/Helv 10.500000 Tf 0 .466667 .831373 rg
+203.85 452.7525 Td
+<796561682C20626574746572> Tj
+EMC
+ET
+Q
+
+endstream
+endobj
+636 0 obj
+<</Type/Annot/Subtype/FreeText/P 43 0 R/F 4/M(D:20240504134140Z00'00)/Contents(posts should have title)/CA 1/CreationDate(D:20240504134136Z00'00)/IT/FreeTextTypewriter/Rotate 0/DA(9.660000 TL /Helv 8.625000 Tf 0 .466667 .831373 rg)/AP<</N 638 0 R>>/Rect[ 459.45 423.15 545.25 433.35]/C[ 0 .466667 .831373]>>
+endobj
+638 0 obj
+<</Length 180/Type/XObject/Subtype/Form/FormType 1/BBox[ 459.45 423.15 545.25 433.35]/Matrix[ 1 0 0 1 -459.45 -423.15]/Resources<</ProcSet[/PDF]/Font<</Helv 593 0 R>>>>>>
+stream
+q
+1 0 0 1 0 0 cm
+459.45 423.15 85.8 10.2 re
+W
+n
+BT
+/P BMC 
+/Helv 8.625000 Tf 0 .466667 .831373 rg
+459.45 425.630625 Td
+<706F7374732073686F756C642068617665207469746C65> Tj
+EMC
+ET
+Q
+
+endstream
+endobj
+1 0 obj
+<</Title(Project: Blog API | The Odin Project)/Creator(Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0)/Producer(Skia/PDF m124)/CreationDate(D:20240430045925+00'00')/ModDate(D:20240504134141Z00'00)>>
+endobj
+xref
+1 1
+0000278252 00000 n
+43 1
+0000275767 00000 n
+630 1
+0000276126 00000 n
+632 2
+0000276461 00000 n
+0000276862 00000 n
+635 2
+0000277178 00000 n
+0000277540 00000 n
+638 1
+0000277865 00000 n
+trailer
+<</Size 639/Root 229 0 R/Info 1 0 R/Prev 275328>>
+startxref
+278545
+%%EOF

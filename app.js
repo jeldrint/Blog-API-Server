@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 
 const session = require('express-session');
 
+const indexRoute = require('./routes/index')
+
 //ENV
 require('dotenv').config();
 
 //MONGODB
 const mongoDb = process.env.URI;
-mongoose.connect(mongoDb);
+mongoose.connect(mongoDb, {dbName: 'blog_API'});
 const db = mongoose.connection;
 db.on('error',console.error.bind(console, 'mongoDB connection error'));
 
@@ -25,6 +27,15 @@ app.use(express.json());
 //MIDDLEWARES (PASSPORT AND EXPRESS SESSION)
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true}));
 
+
+//saving the current user data
+app.use((req,res,next) => {
+    res.locals.currentUser = req.user;
+    next();
+})
+
+//ROUTES
+app.use('/', indexRoute)
 
 //PORT CONNECT
 const port = process.env.PORT || 3000 ;
