@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 
 const session = require('express-session');
 
+const bcrypt = require('bcryptjs');
+const asyncHandler = require('express-async-handler');
+
 const indexRoute = require('./routes/index')
 
 //ENV

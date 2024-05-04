@@ -1,8 +1,9 @@
 # Blog-API
  Blog API, major project from The Odin Project
 
-
 npm install express express-session mongoose passport passport-local ejs nodemon dotenv luxon
+
+npm install bcryptjs express-async-handler express-validator
 
 Apr 30
 - 
@@ -16,4 +17,4 @@ May 4
 
 * Logging in as the admin / blog author
 
-* Sign up for regular accounts
+* Sign up for regular accounts☑️
