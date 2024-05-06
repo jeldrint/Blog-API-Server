@@ -19,7 +19,8 @@ May 4 - May 6
 
 May 6
 * Logging in as the admin / blog author☑️
-    - log-out☑️
-    - ilagay nalang natin yung login sa front page (index)☑️
+    - log-out
+    - ilagay nalang natin yung login sa front page (index)
 
 * Work out on isAdmin flag
+    - pano ngayon ang gagawin here. thinking of putting it in the sign up page pero it needs a passcode or something (pwede)

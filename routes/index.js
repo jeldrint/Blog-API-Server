@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
@@ -74,6 +75,8 @@ router.post('/blog-api/sign-up',[
             })
             return;
         }else{
+            req.body.admincode === process.env.ADMIN_CODE ? user.isAdmin = true : user.isAdmin = false;
+    
             bcrypt.hash(req.body.password, 10, async (err, hashedPw) => {
                 if(err){
                     return err

@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     family_name: {type: String, required: true, maxLength: 100},
     user_name: {type: String, required: true, maxLength: 100},
     password: {type: String, required: true, maxLength: 100},
-    isAdmin: {type: Boolean}
+    isAdmin: {type: Boolean, required: true}
 })
 
 UserSchema.virtual('url').get(function (){
