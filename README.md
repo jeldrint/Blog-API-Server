@@ -15,6 +15,6 @@ May 4
 
 * I tried connecting to mongoDB, in a cluster, but with a different databases. and I have to specify which database should I connnect to.☑️
 
-* Logging in as the admin / blog author
+* Logging in as the admin / blog author☑️
 
 * Sign up for regular accounts☑️
