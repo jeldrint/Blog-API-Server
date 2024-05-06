@@ -17,16 +17,6 @@ router.get('/blog-api', (req,res) => {
     res.render('index', {user: res.locals.currentUser});
 })
 
-
-//LOGIN and LOGOUT
-router.get('/blog-api/login', (req,res)=> {
-    res.render('index', {user: res.locals.currentUser})
-})
-
-router.get('/blog-api/login/:id', (req,res)=> {
-    res.render('index', {user: res.locals.currentUser})
-})
-
 router.get('/logout',(req,res,next)=>{
     req.logOut((err)=>{
         return next(err)
@@ -34,10 +24,12 @@ router.get('/logout',(req,res,next)=>{
     res.redirect('/')
 })
 
-
-//SIGN-UP
 router.get('/blog-api/sign-up', (req,res)=> {
-    res.render('sign-up', {user: res.locals.currentUser})
+    res.render('sign-up')
+})
+
+router.get('/blog-api/:id', (req,res)=> {
+    res.render('index', {user: res.locals.currentUser})
 })
 
 router.post('/blog-api/sign-up',[
@@ -87,8 +79,7 @@ router.post('/blog-api/sign-up',[
                 }
             })
         }
-    })
-    
+    })    
 ])
 
 module.exports = router;

@@ -59,14 +59,14 @@ app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/blog-api/login',
+app.post('/blog-api',
     passport.authenticate('local', {
-        failureRedirect: '/blog-api/',
+        failureRedirect: '/',
     }), (req,res) => {
         const user = new User({
             _id: req.user._id
         })
-        res.redirect(`/blog-api/login/${user.url}`);
+        res.redirect(`/blog-api/${user.url}`);
     }
 )
 

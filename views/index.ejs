@@ -7,20 +7,21 @@
 </head>
 <body>
     <% if(user) { %>
-        <h2>Welcome to my Blog! <%= user.user_name %> </h2>
-        <br />
-        <a href="/logout" >LOG OUT</a>    
+        <h2>Welcome to my Blog, <%= user.first_name %> <%= user.family_name %>
+            <span style="font-size: small"><a href="/logout" >LOG OUT</a> </span>
+        </h2>
+            
     <% }else{ %>
         <h1>BLOG API. Please Log in</h1>
-        <form action="/blog-api/login" method="POST">
+        <form action="" method="POST">
             <label for="username">Username</label>
             <input name="username" placeholder="username" type="text" />
             <label for="password">Password</label>
             <input name="password" type="password" />
-            <button>Log in</button>
+            <button style="cursor: pointer;">Log in</button>
         </form>
         <br><br>
-        <a href="/blog-api/sign-up">SIGN UP!</a>    
+        <a href="/blog-api/sign-up">SIGN UP!</a>
     <% } %>
 </body>
 </html>
