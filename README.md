@@ -17,6 +17,9 @@ May 4 - May 6
 
 * Sign up for regular accounts☑️
 
-* Logging in as the admin / blog author (May 6☑️)
+May 6
+* Logging in as the admin / blog author☑️
     - log-out☑️
     - ilagay nalang natin yung login sa front page (index)☑️
+
+* Work out on isAdmin flag
