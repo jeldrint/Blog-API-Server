@@ -9,7 +9,7 @@ Apr 30
 - 
 * Initial plans / and initial repo
 
-May 4
+May 4 - May 6
 - 
 * need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
 
@@ -17,4 +17,4 @@ May 4
 
 * Logging in as the admin / blog author☑️
 
-* Sign up for regular accounts☑️
+* Sign up for regular accounts (May 6☑️)
