@@ -13,17 +13,24 @@ router.get('/', (req,res) => {
 });
 
 router.get('/blog-api', (req,res) => {
-    res.render('index');
+    res.render('index', {user: res.locals.currentUser});
 })
 
 
-//LOGIN
+//LOGIN and LOGOUT
 router.get('/blog-api/login', (req,res)=> {
-    res.render('login', {user: res.locals.currentUser})
+    res.render('index', {user: res.locals.currentUser})
 })
 
 router.get('/blog-api/login/:id', (req,res)=> {
-    res.render('login', {user: res.locals.currentUser})
+    res.render('index', {user: res.locals.currentUser})
+})
+
+router.get('/logout',(req,res,next)=>{
+    req.logOut((err)=>{
+        return next(err)
+    })
+    res.redirect('/')
 })
 
 

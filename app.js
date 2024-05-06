@@ -61,7 +61,7 @@ app.use(passport.session());
 
 app.post('/blog-api/login',
     passport.authenticate('local', {
-        failureRedirect: '/blog-api/login/',
+        failureRedirect: '/blog-api/',
     }), (req,res) => {
         const user = new User({
             _id: req.user._id
