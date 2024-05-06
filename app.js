@@ -3,11 +3,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const session = require('express-session');
-
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 
-const indexRoute = require('./routes/index')
+const User = require('./models/user')
+const indexRoute = require('./routes/index');
 
 //ENV
 require('dotenv').config();
@@ -23,13 +25,50 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+//PASSPORT LOCAL STRATEGY FOR LOGIN
+passport.use(
+    new LocalStrategy(asyncHandler(async (username, password, done) =>{
+        const user = await User.findOne({user_name: username});
+        if(!user){
+            return done(null, false, {message: 'Incorrect Username. Try again.'});
+        }
+        const match = await bcrypt.compare(password, user.password);
+        if(!match){
+            //passwords do not match
+            return done(null, false, {message: 'Incorrect Password'});
+        }
+        return done(null, user)
+    }))
+)
+
+passport.serializeUser((user,done)=> {
+    done(null,user.id);
+});
+
+passport.deserializeUser(asyncHandler(async (id, done)=>{
+    const user = await User.findById(id);
+    done(null, user);
+}))
+
 //MIDDLEWARES (MAIN)
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
 
 //MIDDLEWARES (PASSPORT AND EXPRESS SESSION)
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.post('/blog-api/login',
+    passport.authenticate('local', {
+        failureRedirect: '/blog-api/login/',
+    }), (req,res) => {
+        const user = new User({
+            _id: req.user._id
+        })
+        res.redirect(`/blog-api/login/${user.url}`);
+    }
+)
 
 //saving the current user data
 app.use((req,res,next) => {

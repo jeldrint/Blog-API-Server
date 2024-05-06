@@ -9,4 +9,8 @@ const UserSchema = new Schema({
     isAdmin: {type: Boolean}
 })
 
+UserSchema.virtual('url').get(function (){
+    return this._id
+})
+
 module.exports = mongoose.model('Users', UserSchema)

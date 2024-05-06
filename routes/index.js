@@ -16,10 +16,15 @@ router.get('/blog-api', (req,res) => {
     res.render('index');
 })
 
+
+//LOGIN
 router.get('/blog-api/login', (req,res)=> {
     res.render('login', {user: res.locals.currentUser})
 })
 
+router.get('/blog-api/login/:id', (req,res)=> {
+    res.render('login', {user: res.locals.currentUser})
+})
 
 
 //SIGN-UP
@@ -62,11 +67,11 @@ router.post('/blog-api/sign-up',[
             })
             return;
         }else{
-            bcrypt.hash(req.body.password, 10, async (err, hashedPW) => {
+            bcrypt.hash(req.body.password, 10, async (err, hashedPw) => {
                 if(err){
                     return err
                 }else{
-                    user.password = hashedPW;
+                    user.password = hashedPw;
                     await user.save();
                     res.redirect('/');
                 }

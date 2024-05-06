@@ -6,15 +6,19 @@
     <title>Blog API Login Page</title>
 </head>
 <body>
-    <h1>Please Log in</h1>
-    <form action="login" method="POST">
-        <label for="username">Username</label>
-        <input name="username" placeholder="username" type="text" />
-        <label for="password">Password</label>
-        <input name="password" type="password" />
-        <button>Log in</button>
-    </form>
-    <br><br>
-    <a href="/blog-api/sign-up">SIGN UP!</a>
+    <% if(user) { %>
+        <h2>Welcome to my Blog! <%= user.user_name %> </h2>
+    <% }else{ %>
+        <h1>Please Log in</h1>
+        <form action="login" method="POST">
+            <label for="username">Username</label>
+            <input name="username" placeholder="username" type="text" />
+            <label for="password">Password</label>
+            <input name="password" type="password" />
+            <button>Log in</button>
+        </form>
+        <br><br>
+        <a href="/blog-api/sign-up">SIGN UP!</a>    
+    <% } %>
 </body>
 </html>
