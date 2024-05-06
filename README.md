@@ -23,4 +23,4 @@ May 6
     - ilagay nalang natin yung login sa front page (index)
 
 * Work out on isAdmin flag
-    - pano ngayon ang gagawin here. thinking of putting it in the sign up page pero it needs a passcode or something (pwede)
+    - pano ngayon ang gagawin here. thinking of putting it in the sign up page pero it needs a passcode or something (pwede) ☑️
