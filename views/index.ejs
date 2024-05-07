@@ -7,8 +7,8 @@
 </head>
 <body>
     <% if(user) { %>
-        <h2>Welcome to my Blog, <%= user.first_name %> <%= user.family_name %>
-            <span style="font-size: small"><a href="/logout" >LOG OUT</a> </span>
+        <h2 style="letter-spacing: 0.25px;">Welcome to my Blog,&ensp;<%= user.first_name %> <%= user.family_name %>&emsp14; 
+            <span style="font-size: small"><a href="/blog-api/logout" >LOG OUT</a> </span>
         </h2>
             
     <% }else{ %>

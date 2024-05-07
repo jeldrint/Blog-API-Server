@@ -9,7 +9,7 @@ Apr 30
 - 
 * Initial plans / and initial repo
 
-May 4 - May 6
+May 4 - May 7
 - 
 * need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
 
@@ -24,3 +24,7 @@ May 6
 
 * Work out on isAdmin flag
     - pano ngayon ang gagawin here. thinking of putting it in the sign up page pero it needs a passcode or something (pwede) ☑️
+
+May 7
+* Rewritten the routes
+    - maximizing the express.Router() to make the writing of URL simpler

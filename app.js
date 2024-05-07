@@ -10,6 +10,7 @@ const asyncHandler = require('express-async-handler');
 
 const User = require('./models/user')
 const indexRoute = require('./routes/index');
+const blogAPIRoute = require('./routes/blog-api')
 
 //ENV
 require('dotenv').config();
@@ -78,6 +79,7 @@ app.use((req,res,next) => {
 
 //ROUTES
 app.use('/', indexRoute)
+app.use('/blog-api', blogAPIRoute)
 
 //PORT CONNECT
 const port = process.env.PORT || 3000 ;
