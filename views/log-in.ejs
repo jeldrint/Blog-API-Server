@@ -8,11 +8,11 @@
 <body>
     <% if(user) { %>
         <h2 style="letter-spacing: 0.25px;">Welcome to my Blog,&ensp;<%= user.first_name %> <%= user.family_name %>&emsp14; 
-            <span style="font-size: small"><a href="/blog-api/logout" >LOG OUT</a> </span>
+            <span style="font-size: small"><a href="/techy-blog/logout" >LOG OUT</a> </span>
         </h2>
             
     <% }else{ %>
-        <h1>BLOG API. Please Log in</h1>
+        <h1>Please Log in</h1>
         <form action="" method="POST">
             <label for="username">Username</label>
             <input name="username" placeholder="username" type="text" />
@@ -21,7 +21,7 @@
             <button style="cursor: pointer;">Log in</button>
         </form>
         <br><br>
-        <a href="/blog-api/sign-up">SIGN UP!</a>
+        <a href="/techy-blog">Go back</a>
     <% } %>
 </body>
 </html>

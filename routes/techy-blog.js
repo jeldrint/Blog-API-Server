@@ -9,7 +9,7 @@ const {body, validationResult} = require('express-validator');
 const User = require('../models/user')
 
 router.get('/', (req,res) => {
-    res.render('index', {user: res.locals.currentUser});
+    res.render('techy-blog');
 })
 
 router.get('/logout',(req,res,next)=>{
@@ -26,7 +26,7 @@ router.get('/sign-up', (req,res)=> {
 })
 
 router.get('/:id', (req,res)=> {
-    res.render('index', {user: res.locals.currentUser})
+    res.render('log-in', {user: res.locals.currentUser})
 })
 
 router.post('/sign-up',[

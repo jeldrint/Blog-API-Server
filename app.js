@@ -10,7 +10,7 @@ const asyncHandler = require('express-async-handler');
 
 const User = require('./models/user')
 const indexRoute = require('./routes/index');
-const blogAPIRoute = require('./routes/blog-api')
+const techyBlogRoute = require('./routes/techy-blog')
 
 //ENV
 require('dotenv').config();
@@ -60,14 +60,14 @@ app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/blog-api',
+app.post('/techy-blog/log-in',
     passport.authenticate('local', {
         failureRedirect: '/',
     }), (req,res) => {
         const user = new User({
             _id: req.user._id
         })
-        res.redirect(`/blog-api/${user.url}`);
+        res.redirect(`/techy-blog/${user.url}`);
     }
 )
 
@@ -79,7 +79,7 @@ app.use((req,res,next) => {
 
 //ROUTES
 app.use('/', indexRoute)
-app.use('/blog-api', blogAPIRoute)
+app.use('/techy-blog', techyBlogRoute)
 
 //PORT CONNECT
 const port = process.env.PORT || 3000 ;

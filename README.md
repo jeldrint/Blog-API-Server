@@ -9,7 +9,7 @@ Apr 30
 - 
 * Initial plans / and initial repo
 
-May 4 - May 7
+May 4 - May 9
 - 
 * need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
 
@@ -28,3 +28,8 @@ May 6
 May 7
 * Rewritten the routes
     - maximizing the express.Router() to make the writing of URL simpler
+
+May 9
+* Styling of the blog page (may paggagayahan na haha)
+    - magkaiba pagka login ng regular accounts at ng mga blog authors
+    - style StackOverflow pala mangyayari dito. maglalogin yung mga magcocomments or upvote, but anyone can see the posts whether logged in or not
