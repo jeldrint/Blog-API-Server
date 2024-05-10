@@ -33,3 +33,11 @@ May 9
 * Styling of the blog page (may paggagayahan na haha)
     - magkaiba pagka login ng regular accounts at ng mga blog authors
     - style StackOverflow pala mangyayari dito. maglalogin yung mga magcocomments or upvote, but anyone can see the posts whether logged in or not
+
+May 11
+* tidied up the initial pages (20% progress)
+
+
+* Distinction between log-in pages of common account and blog author. 
+    - Common account = views / comments
+    - Blog Author = views / comments / edit delete posts
