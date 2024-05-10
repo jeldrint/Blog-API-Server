@@ -6,12 +6,6 @@
     <title>Blog API Project</title>
 </head>
 <body>
-    <% if(user) { %>
-        <h2 style="letter-spacing: 0.25px;">Welcome to my Blog,&ensp;<%= user.first_name %> <%= user.family_name %>&emsp14; 
-            <span style="font-size: small"><a href="/techy-blog/logout" >LOG OUT</a> </span>
-        </h2>
-            
-    <% }else{ %>
         <h1>Please Log in</h1>
         <form action="" method="POST">
             <label for="username">Username</label>
@@ -22,6 +16,5 @@
         </form>
         <br><br>
         <a href="/techy-blog">Go back</a>
-    <% } %>
 </body>
 </html>

@@ -6,16 +6,25 @@
     <title>TECHY BLOG MAIN PAGE</title>
 </head>
 <body>
-    <div style="display: flex; justify-content: space-between; padding: 10px 10px">
-        <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
-        <div style="display: flex; column-gap: 10px;">
-            <form action="/techy-blog/log-in" method="get" >
-                <button style="cursor: pointer;">Log in</button>
-            </form>
-            <form action="/techy-blog/sign-up" method="get" >
-                <button style="cursor: pointer;">Sign up</button>
-            </form>
-        </div>    
-    </div>
+    <% if(user) { %>
+        <div style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
+            <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
+            <p style="margin: 0; font-size: 16px; font-weight: bold;"><%= user.first_name %> <%= user.family_name %>
+                <span style="font-size: 10px"><a href="/techy-blog/log-out" >LOG OUT</a> </span>
+            </p>
+        </div>
+    <% }else{ %>
+        <div style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center">
+            <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
+            <div style="display: flex; column-gap: 10px;">
+                <form action="/techy-blog/log-in" method="get" >
+                    <button style="cursor: pointer;">Log in</button>
+                </form>
+                <form action="/techy-blog/sign-up" method="get" >
+                    <button style="cursor: pointer;">Sign up</button>
+                </form>
+            </div>    
+        </div>
+    <% } %>
 </body>
 </html>

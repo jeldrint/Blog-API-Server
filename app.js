@@ -62,7 +62,7 @@ app.use(passport.session());
 
 app.post('/techy-blog/log-in',
     passport.authenticate('local', {
-        failureRedirect: '/',
+        failureRedirect: '/techy-blog/log-in',
     }), (req,res) => {
         const user = new User({
             _id: req.user._id

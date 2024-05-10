@@ -9,10 +9,19 @@ const {body, validationResult} = require('express-validator');
 const User = require('../models/user')
 
 router.get('/', (req,res) => {
-    res.render('techy-blog');
+    res.render('techy-blog',  {user: res.locals.currentUser});
 })
 
-router.get('/logout',(req,res,next)=>{
+
+router.get('/sign-up', (req,res)=> {
+    res.render('sign-up')
+})
+
+router.get('/log-in', (req,res)=> {
+    res.render('log-in', {user: res.locals.currentUser})
+})
+
+router.get('/log-out',(req,res,next)=>{
     req.logOut((err)=>{
         if(err){
             return next(err)
@@ -21,12 +30,8 @@ router.get('/logout',(req,res,next)=>{
     res.redirect('/')
 })
 
-router.get('/sign-up', (req,res)=> {
-    res.render('sign-up')
-})
-
 router.get('/:id', (req,res)=> {
-    res.render('log-in', {user: res.locals.currentUser})
+    res.render('techy-blog', {user: res.locals.currentUser})
 })
 
 router.post('/sign-up',[
