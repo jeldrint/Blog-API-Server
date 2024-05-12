@@ -6,12 +6,13 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const {body, validationResult} = require('express-validator');
 
+
 const User = require('../models/user')
+const Post = require('../models/post')
 
 router.get('/', (req,res) => {
     res.render('techy-blog',  {user: res.locals.currentUser});
 })
-
 
 router.get('/sign-up', (req,res)=> {
     res.render('sign-up')
@@ -30,9 +31,34 @@ router.get('/log-out',(req,res,next)=>{
     res.redirect('/')
 })
 
-router.get('/:id', (req,res)=> {
-    res.render('techy-blog', {user: res.locals.currentUser})
+//MAIN DISPLAY
+router.get('/:id', asyncHandler (async (req,res)=> {
+    const posts = await Post.find().exec();
+    
+    res.render('techy-blog', {
+        user: res.locals.currentUser,
+
+    })
+}))
+
+
+// WRITING POST (BLOG AUTHOR)
+router.get('/:id/write-post', (req,res)=> {
+    res.render('write-post', {user: res.locals.currentUser})
 })
+
+router.post('/:id/write-post', asyncHandler(async (req,res)=> {
+    console.log(res.locals.currentUser)
+    const post = new Post({
+        title: req.body.title,
+        timestamp: Date.now(),
+        body: req.body.message,
+        userId: res.locals.currentUser._id
+    })
+    await post.save();
+    res.redirect(`/techy-blog/${req.params.id}`)
+}))
+
 
 router.post('/sign-up',[
     body('firstname')
