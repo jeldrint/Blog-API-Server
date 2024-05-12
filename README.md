@@ -41,3 +41,6 @@ May 11
 * Distinction between log-in pages of common account and blog author. 
     - Common account = views / comments
     - Blog Author = views / comments / edit delete posts
+
+May 12 - May 18
+- 
