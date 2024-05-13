@@ -45,5 +45,7 @@ May 12 - May 18
 * Let's make the Blog Author account
     - view post  (also for common account)
     - create/ edit / delete post
-        * Create 
     - comments (also for common account)
+* May 12 - 13
+    - can create post now (Blog Author account)
+    - displayed published posts for public and logged accounts

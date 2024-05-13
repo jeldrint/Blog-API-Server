@@ -6,8 +6,8 @@
     <title>TECHY BLOG MAIN PAGE</title>
 </head>
 <body>
-    <div style="display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
-        <% if(user) { %>
+    <% if(user) { %>
+        <div style="display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
             <header style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
                 <div style="display: flex; align-items: center; column-gap: 10px;">
                     <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
@@ -33,35 +33,20 @@
             </main>
             <footer style="text-align: center;">
                 <span> 2024 | jeldrint | Blog API Project | The Odin Project</span>
-            </footer>
-        <% }else{ %>
-            <header style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
-                <div style="display: flex; align-items: center; column-gap: 10px;">
-                    <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
-                </div>
-                <div style="display: flex; column-gap: 10px;">
-                    <form action="/techy-blog/log-in" method="get" >
-                        <button style="cursor: pointer;">Log in</button>
-                    </form>
-                    <form action="/techy-blog/sign-up" method="get" >
-                        <button style="cursor: pointer;">Sign up</button>
-                    </form>
-                </div>    
-            </header>
-            <main>
-                <% if(posts){%>
-                    <% posts.forEach(post => { %>
-                        <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px; text-align: center;">
-                            <h4><%= post.title %></h4>
-                            <p><%= post.body %></p>
-                        </div>
-                    <% }); %>
-                <% } %>
-            </main>
-            <footer style="text-align: center;">
-                <span> 2024 | jeldrint | Blog API Project | The Odin Project</span>
-            </footer>
-        <% } %>
-    </div>
+            </footer>    
+        </div>
+    <% }else{ %>
+        <div style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center">
+            <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
+            <div style="display: flex; column-gap: 10px;">
+                <form action="/techy-blog/log-in" method="get" >
+                    <button style="cursor: pointer;">Log in</button>
+                </form>
+                <form action="/techy-blog/sign-up" method="get" >
+                    <button style="cursor: pointer;">Sign up</button>
+                </form>
+            </div>    
+        </div>
+    <% } %>
 </body>
 </html>
