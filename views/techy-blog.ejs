@@ -6,7 +6,7 @@
     <title>TECHY BLOG MAIN PAGE</title>
 </head>
 <body>
-    <div style="display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
+    <div style="font-family: Arial, Helvetica, sans-serif; display:flex; flex-direction: column; justify-content: space-between; height: 100%;">
         <% if(user) { %>
             <header style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
                 <div style="display: flex; align-items: center; column-gap: 10px;">
@@ -25,9 +25,9 @@
                 <% }else{ %>
                 <% } %>
                 <% posts.forEach(post => { %>
-                    <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px; text-align: center;">
-                        <h4><%= post.title %></h4>
-                        <p><%= post.body %></p>
+                    <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
+                        <h3 style="white-space: pre-line;"><%= post.title %></h3>
+                        <p style="white-space: pre-line;"><%= post.body %></p>
                     </div>
                 <% }); %>
             </main>
@@ -49,14 +49,12 @@
                 </div>    
             </header>
             <main>
-                <% if(posts){%>
-                    <% posts.forEach(post => { %>
-                        <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px; text-align: center;">
-                            <h4><%= post.title %></h4>
-                            <p><%= post.body %></p>
-                        </div>
-                    <% }); %>
-                <% } %>
+                <% posts.forEach(post => { %>
+                    <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
+                        <h3 style="white-space: pre-line;"><%= post.title %></h3>
+                        <p style="white-space: pre-line;"><%= post.body %></p>
+                    </div>
+                <% }); %>
             </main>
             <footer style="text-align: center;">
                 <span> 2024 | jeldrint | Blog API Project | The Odin Project</span>

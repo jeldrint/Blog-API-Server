@@ -47,5 +47,6 @@ May 12 - May 18
     - create/ edit / delete post
     - comments (also for common account)
 * May 12 - 13
-    - can create post now (Blog Author account)
-    - displayed published posts for public and logged accounts
+    - can create post now (Blog Author account) ☑️
+    - displayed published posts for public and logged accounts ☑️
+    - make the blog presentable
