@@ -49,4 +49,4 @@ May 12 - May 18
 * May 12 - 13
     - can create post now (Blog Author account) ☑️
     - displayed published posts for public and logged accounts ☑️
-    - make the blog presentable
+    - make the blog presentable ☑️

@@ -12,7 +12,6 @@ const Post = require('../models/post')
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
     const posts = await Post.find().exec();
-    console.log(posts)
     res.render('techy-blog', {
         user: res.locals.currentUser,
         posts: posts
@@ -39,7 +38,6 @@ router.get('/log-out',(req,res,next)=>{
 //MAIN PAGE DISPLAY FOR LOGGED ACCOUNTS
 router.get('/:id', asyncHandler (async (req,res)=> {
     const posts = await Post.find().exec();
-    console.log(posts)
     res.render('techy-blog', {
         user: res.locals.currentUser,
         posts: posts
