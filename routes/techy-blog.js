@@ -11,7 +11,7 @@ const Post = require('../models/post')
 
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
-    const posts = await Post.find().populate('userId').exec();
+    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
     res.render('techy-blog', {
         user: res.locals.currentUser,
         posts: posts
@@ -35,23 +35,12 @@ router.get('/log-out',(req,res,next)=>{
     res.redirect('/')
 })
 
-//MAIN PAGE DISPLAY FOR LOGGED ACCOUNTS
-router.get('/:id', asyncHandler (async (req,res)=> {
-    const posts = await Post.find().populate('userId').exec();
-    res.render('techy-blog', {
-        user: res.locals.currentUser,
-        posts: posts
-    })
-
-}))
-
 // WRITING POST (BLOG AUTHOR)
-router.get('/:id/write-post', (req,res)=> {
-    res.render('write-post', {user: res.locals.currentUser})
+router.get('/write-post', (req,res)=> {
+    res.render('post-write', {user: res.locals.currentUser})
 })
 
-router.post('/:id/write-post', asyncHandler(async (req,res)=> {
-    console.log(res.locals.currentUser)
+router.post('/write-post', asyncHandler(async (req,res)=> {
     const post = new Post({
         title: req.body.title,
         timestamp: Date.now(),
@@ -59,7 +48,56 @@ router.post('/:id/write-post', asyncHandler(async (req,res)=> {
         userId: res.locals.currentUser._id
     })
     await post.save();
-    res.redirect(`/techy-blog/${req.params.id}`)
+    res.redirect(req.user.url)
+}))
+
+// UPDATE POST
+router.get('/update-post/:id', asyncHandler(async (req,res) =>{
+    const post = await Post.findById(req.params.id).exec();
+    res.render('post-update', {
+        post: post
+    })
+}))
+
+router.post('/update-post/:id', asyncHandler(async(req,res)=>{
+    if((Object.entries(req.body)[2][0]) === 'cancel-btn'){
+        res.redirect(req.user.url);
+    }
+    if((Object.entries(req.body)[2][0]) === 'update-btn'){
+        await Post.updateOne({_id: req.params.id}, {$set:{
+            title: req.body.title,
+            body: req.body.message,
+            isUpdated: true,
+            updatedTimestamp: Date.now(),
+            userIdUpdated: res.locals.currentUser._id
+        }}) 
+        res.redirect(req.user.url);
+    }
+}))
+
+// DELETE POST
+router.get('/delete-post/:id', (req,res) =>{
+    res.render('post-delete', {user: res.locals.currentUser})
+})
+
+router.post('/delete-post/:id', asyncHandler(async (req,res) => {
+    if((Object.entries(req.body)[0][0]) === 'yes-btn'){
+        await Post.findByIdAndDelete(req.params.id)
+        res.redirect(req.user.url);
+   }
+   if((Object.entries(req.body)[0][0]) === 'no-btn'){
+        res.redirect(req.user.url);
+   }
+}))
+
+//MAIN PAGE DISPLAY FOR LOGGED ACCOUNTS
+router.get('/:id', asyncHandler (async (req,res)=> {
+    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
+    res.render('techy-blog', {
+        user: res.locals.currentUser,
+        posts: posts
+    })
+
 }))
 
 router.post('/sign-up',[

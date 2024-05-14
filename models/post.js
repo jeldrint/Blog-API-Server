@@ -7,15 +7,29 @@ const PostSchema = new Schema({
     timestamp: {type: Date, required: true},
     body: {type: String, required: true, maxLength: 50000},
     userId: {type: Schema.Types.ObjectId, ref: 'Users'},
-    comments: {type: Schema.Types.ObjectId, ref: 'Comments'}
+    comments: {type: Schema.Types.ObjectId, ref: 'Comments'},
+ 
+    //For Updated Posts
+    isUpdated: {type: Boolean, default: false},
+    updatedTimestamp: {type: Date},
+    userIdUpdated: {type: Schema.Types.ObjectId, ref: 'Users'},
 })
 
-PostSchema.virtual('date_formatted').get(function () {
+PostSchema.virtual('timestamp_formatted').get(function () {
     if(DateTime.fromJSDate(this.timestamp).isValid){
         return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATETIME_FULL)
     }else{
         return 'N/A'
     }
 })
+
+PostSchema.virtual('updated_timestamp_formatted').get(function () {
+    if(DateTime.fromJSDate(this.updatedTimestamp).isValid){
+        return DateTime.fromJSDate(this.updatedTimestamp).toLocaleString(DateTime.DATETIME_FULL)
+    }else{
+        return 'N/A'
+    }
+})
+
 
 module.exports = mongoose.model('Posts', PostSchema)

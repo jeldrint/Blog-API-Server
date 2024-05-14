@@ -67,7 +67,7 @@ app.post('/techy-blog/log-in',
         const user = new User({
             _id: req.user._id
         })
-        res.redirect(`/techy-blog/${user.url}`);
+        res.redirect(user.url);
     }
 )
 
