@@ -46,7 +46,13 @@ May 12 - May 18
     - view post  (also for common account)
     - create/ edit / delete post
     - comments (also for common account)
+    - published / unpublished posts
+        * unpublished posts can be viewed by the blog authors?
+        * published posts can be viewed by common accounts as well as the public
+
 * May 12 - 13
     - can create post now (Blog Author account) ☑️
     - displayed published posts for public and logged accounts ☑️
     - make the blog presentable ☑️
+
+* May 14
