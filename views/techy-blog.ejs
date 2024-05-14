@@ -26,7 +26,10 @@
                 <% posts.forEach(post => { %>
                     <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
                         <h3 style="white-space: pre-line;"><%= post.title %></h3>
-                        <h5 style="">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
+                        <div style="display: flex; column-gap: 15px;">
+                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
+                            <h5 style="margin: 0;">Created: <%= post.date_formatted %></h5>
+                        </div>
                         <p style="white-space: pre-line;"><%= post.body %></p>
                     </div>
                 <% }); %>
@@ -52,7 +55,10 @@
                 <% posts.forEach(post => { %>
                     <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
                         <h3 style="white-space: pre-line;"><%= post.title %></h3>
-                        <h5 style="">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
+                        <div style="display: flex; column-gap: 15px;">
+                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
+                            <h5 style="margin: 0;">Created: <%= post.date_formatted %></h5>
+                        </div>
                         <p style="white-space: pre-line;"><%= post.body %></p>
                     </div>
                 <% }); %>
