@@ -10,7 +10,7 @@
         <% if(user) { %>
             <header style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
                 <div style="display: flex; align-items: center; column-gap: 10px;">
-                    <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
+                    <p style="margin: 0; font-size: 40px; font-weight: bold;">Techy Blog</p>
                 </div>
 
                 <p style="margin: 0; font-size: 16px; font-weight: bold;"><%= user.first_name %> <%= user.family_name %>
@@ -26,31 +26,29 @@
                 <% posts.forEach(post => { %>
                     <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
                         <% if(user.isAdmin === true){ %>
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <h3 style="white-space: pre-line;"><%= post.title %></h3>
-                            <div style="display: flex; column-gap: 10px;">
-                                <form action="/techy-blog/update-post/<%= post.id %>" method="get">
-                                    <button style="cursor: pointer;">UPDATE</button>
-                                </form>
-                                <form action="/techy-blog/delete-post/<%= post.id %>" method="get">
-                                    <button style="cursor: pointer;">DELETE</button>
-                                </form>    
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <h2 style="white-space: pre-line; margin: 12px 0"><%= post.title %></h2>
+                                <div style="display: flex; column-gap: 10px;">
+                                    <form action="/techy-blog/update-post/<%= post.id %>" method="get">
+                                        <button style="cursor: pointer;">UPDATE</button>
+                                    </form>
+                                    <form action="/techy-blog/delete-post/<%= post.id %>" method="get">
+                                        <button style="cursor: pointer;">DELETE</button>
+                                    </form>    
+                                </div>
                             </div>
-                        </div>
                         <% }else{ %>
-                        <h3 style="white-space: pre-line;"><%= post.title %></h3>
+                            <h2 style="white-space: pre-line; margin: 12px 0"><%= post.title %></h2>
                         <% } %>
-                        <div style="display: flex; column-gap: 15px;">
+                        <div>
                             <% if(post.isUpdated === true){ %>
-                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
-                            <h5 style="margin: 0;">Created: <%= post.timestamp_formatted %></h5>        
-                            <h5 style="margin: 0;">Modified by:&emsp13;<i><%= post.userIdUpdated.user_name%>&emsp13;<%= post.updated_timestamp_formatted %></i></h5>    
+                                <h5 style="margin: 2px 0;">By:&emsp13;<i><%= post.userId.user_name%></i>&emsp;Created: <%= post.timestamp_formatted %></h5>
+                                <h5 style="margin: 2px 0;">Modified by:&emsp13;<i><%= post.userIdUpdated.user_name%></i>&emsp;<%= post.updated_timestamp_formatted %></h5>    
                             <% }else{ %>
-                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
-                            <h5 style="margin: 0;">Created: <%= post.timestamp_formatted %></h5>
+                                <h5 style="margin: 3px 0;">By:&emsp13;<i><%= post.userId.user_name%></i>&emsp;Created: <%= post.timestamp_formatted %></h5>
                             <% } %>
                         </div>
-                        <p style="white-space: pre-line;"><%= post.body %></p>
+                        <p style="white-space: pre-line; margin: 35px 0 20px 0"><%= post.body %></p>
                     </div>
                 <% }); %>
             </main>
@@ -63,7 +61,7 @@
         <% }else{ %>
             <header style="display: flex; justify-content: space-between; padding: 10px 10px; align-items: center;">
                 <div style="display: flex; align-items: center; column-gap: 10px;">
-                    <p style="margin: 0; font-size: 32px; font-weight: bold;">Techy Blog</p>
+                    <p style="margin: 0; font-size: 40px; font-weight: bold;">Techy Blog</p>
                 </div>
                 <div style="display: flex; column-gap: 10px;">
                     <form action="/techy-blog/log-in" method="get" >
@@ -77,18 +75,16 @@
             <main>
                 <% posts.forEach(post => { %>
                     <div style="margin: 10px 20px; border: solid 1px black; padding: 10px; border-radius: 5px;">
-                        <h3 style="white-space: pre-line;"><%= post.title %></h3>
-                        <div style="display: flex; column-gap: 15px;">
+                        <h2 style="white-space: pre-line; margin: 12px 0"><%= post.title %></h2>
+                        <div>
                             <% if(post.isUpdated === true){ %>
-                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
-                            <h5 style="margin: 0;">Created: <%= post.timestamp_formatted %></h5>        
-                            <h5 style="margin: 0;">Modified by:&emsp13;<i><%= post.userIdUpdated.user_name%>&emsp13;<%= post.updated_timestamp_formatted %></i></h5>    
+                                <h5 style="margin: 2px 0;">By:&emsp13;<i><%= post.userId.user_name%></i>&emsp;Created: <%= post.timestamp_formatted %></h5>
+                                <h5 style="margin: 2px 0;">Modified by:&emsp13;<i><%= post.userIdUpdated.user_name%></i>&emsp;<%= post.updated_timestamp_formatted %></h5>    
                             <% }else{ %>
-                            <h5 style="margin: 0;">By:&emsp13;<i><%= post.userId.user_name%></i></h5>
-                            <h5 style="margin: 0;">Created: <%= post.timestamp_formatted %></h5>
+                                <h5 style="margin: 3px 0;">By:&emsp13;<i><%= post.userId.user_name%></i>&emsp;Created: <%= post.timestamp_formatted %></h5>
                             <% } %>
                         </div>
-                        <p style="white-space: pre-line;"><%= post.body %></p>
+                        <p style="white-space: pre-line; margin: 35px 0 20px 0"><%= post.body %></p>
                     </div>
                 <% }); %>
             </main>

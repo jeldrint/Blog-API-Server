@@ -6,19 +6,24 @@
     <title>Update a post</title>
 </head>
 <body>
-    <h3>Update post here...</h3>
-    <form action="" method="POST">
-        <div style="display: inline; width: 500px; height: 200px;">
-            <div style="display: flex; flex-direction: column; row-gap: 5px;">
-                <input type="text" name="title" placeholder="title..." value="<%= post.title %>" required>
-                <textarea style="resize: none; height: 300px; white-space: pre-wrap;" type="text" name="message" placeholder="message..." required>
-                    <%= post.body %>
-                </textarea>    
+    <% if(err) { %>
+        <p>Error Message: <%= err[0].msg %></p>
+        <p>Total number of characters: <%=postLength%></p>
+        <p>Error Path: <%= err[0].path %></p>
+        <p>Error Location: <%= err[0].location %></p>
+    <% }else{ %>
+        <h3>Update post here...</h3>
+        <form action="" method="POST">
+            <div style="display: inline; width: 500px; height: 200px;">
+                <div style="display: flex; flex-direction: column; row-gap: 5px;">
+                    <input type="text" name="title" placeholder="title..." value="<%= post.title %>" required>
+                    <textarea style="resize: none; height: 300px; white-space: pre-wrap;" type="text" name="message" placeholder="message..." required><%= post.body %></textarea>
+                </div>
             </div>
-        </div>
-        <br />
-        <button name='cancel-btn' style="cursor: pointer;">CANCEL</button>&emsp;
-        <button name='update-btn' style="cursor: pointer;">UPDATE</button>
-    </form>
+            <br />
+            <button name='cancel-btn' style="cursor: pointer;">CANCEL</button>&emsp;
+            <button name='update-btn' style="cursor: pointer;">UPDATE</button>
+        </form>    
+    <% } %>
 </body>
 </html>

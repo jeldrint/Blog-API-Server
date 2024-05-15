@@ -61,3 +61,7 @@ May 12 - May 18
     - edit and delete post done
         - deleting has been easy, and the first parts of update
         - but I spent so much time debugging the update schema parts, since I modified the fields of the update schema, and I did some trial and error
+
+* May 15
+    - cleaning up the code, cleaning up the update button (60% done, functional)
+        - update is now clean, i put express validator to not accept messages beyond 7000 words

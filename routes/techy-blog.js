@@ -55,25 +55,42 @@ router.post('/write-post', asyncHandler(async (req,res)=> {
 router.get('/update-post/:id', asyncHandler(async (req,res) =>{
     const post = await Post.findById(req.params.id).exec();
     res.render('post-update', {
-        post: post
+        post: post,
+        err: ''
     })
 }))
 
-router.post('/update-post/:id', asyncHandler(async(req,res)=>{
-    if((Object.entries(req.body)[2][0]) === 'cancel-btn'){
-        res.redirect(req.user.url);
-    }
-    if((Object.entries(req.body)[2][0]) === 'update-btn'){
-        await Post.updateOne({_id: req.params.id}, {$set:{
-            title: req.body.title,
-            body: req.body.message,
-            isUpdated: true,
-            updatedTimestamp: Date.now(),
-            userIdUpdated: res.locals.currentUser._id
-        }}) 
-        res.redirect(req.user.url);
-    }
-}))
+router.post('/update-post/:id', [
+    body('title').isLength({max: 500})
+        .withMessage('Character for title exceeded the limit'),
+    body('message').isLength({max: 7000})
+        .withMessage('Character for your message exceeded the limit (7000 characters)'),
+    asyncHandler(async(req,res)=>{
+        const err = validationResult(req);
+        console.log(err)
+        if((Object.entries(req.body)[2][0]) === 'cancel-btn'){
+            res.redirect(req.user.url);
+        }
+        if((Object.entries(req.body)[2][0]) === 'update-btn'){
+            if(!err.isEmpty()){
+                res.render('post-update',{
+                    err: err.array(),
+                    postLength: Object.keys(req.body.message).length
+                })
+                return;
+            }else{
+                await Post.updateOne({_id: req.params.id}, {$set:{
+                    title: req.body.title,
+                    body: req.body.message,
+                    isUpdated: true,
+                    updatedTimestamp: Date.now(),
+                    userIdUpdated: res.locals.currentUser._id
+                }}) 
+                res.redirect(req.user.url);    
+            }
+        }
+    })
+])
 
 // DELETE POST
 router.get('/delete-post/:id', (req,res) =>{
