@@ -65,3 +65,6 @@ May 12 - May 18
 * May 15
     - cleaning up the code, cleaning up the update button (60% done, functional)
         - update is now clean, i put express validator to not accept messages beyond 7000 words
+        - tidying up the url, adding two parameters
+    - working on comments
+        - when in public, there is a comment button, which will redirect you to log in

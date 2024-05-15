@@ -18,10 +18,6 @@ router.get('/', asyncHandler(async (req,res) => {
     })
 }))
 
-router.get('/sign-up', (req,res)=> {
-    res.render('sign-up')
-})
-
 router.get('/log-in', (req,res)=> {
     res.render('log-in', {user: res.locals.currentUser})
 })
@@ -35,87 +31,10 @@ router.get('/log-out',(req,res,next)=>{
     res.redirect('/')
 })
 
-// WRITING POST (BLOG AUTHOR)
-router.get('/write-post', (req,res)=> {
-    res.render('post-write', {user: res.locals.currentUser})
+// FOR SIGN UP
+router.get('/sign-up', (req,res)=> {
+    res.render('sign-up')
 })
-
-router.post('/write-post', asyncHandler(async (req,res)=> {
-    const post = new Post({
-        title: req.body.title,
-        timestamp: Date.now(),
-        body: req.body.message,
-        userId: res.locals.currentUser._id
-    })
-    await post.save();
-    res.redirect(req.user.url)
-}))
-
-// UPDATE POST
-router.get('/update-post/:id', asyncHandler(async (req,res) =>{
-    const post = await Post.findById(req.params.id).exec();
-    res.render('post-update', {
-        post: post,
-        err: ''
-    })
-}))
-
-router.post('/update-post/:id', [
-    body('title').isLength({max: 500})
-        .withMessage('Character for title exceeded the limit'),
-    body('message').isLength({max: 7000})
-        .withMessage('Character for your message exceeded the limit (7000 characters)'),
-    asyncHandler(async(req,res)=>{
-        const err = validationResult(req);
-        console.log(err)
-        if((Object.entries(req.body)[2][0]) === 'cancel-btn'){
-            res.redirect(req.user.url);
-        }
-        if((Object.entries(req.body)[2][0]) === 'update-btn'){
-            if(!err.isEmpty()){
-                res.render('post-update',{
-                    err: err.array(),
-                    postLength: Object.keys(req.body.message).length
-                })
-                return;
-            }else{
-                await Post.updateOne({_id: req.params.id}, {$set:{
-                    title: req.body.title,
-                    body: req.body.message,
-                    isUpdated: true,
-                    updatedTimestamp: Date.now(),
-                    userIdUpdated: res.locals.currentUser._id
-                }}) 
-                res.redirect(req.user.url);    
-            }
-        }
-    })
-])
-
-// DELETE POST
-router.get('/delete-post/:id', (req,res) =>{
-    res.render('post-delete', {user: res.locals.currentUser})
-})
-
-router.post('/delete-post/:id', asyncHandler(async (req,res) => {
-    if((Object.entries(req.body)[0][0]) === 'yes-btn'){
-        await Post.findByIdAndDelete(req.params.id)
-        res.redirect(req.user.url);
-   }
-   if((Object.entries(req.body)[0][0]) === 'no-btn'){
-        res.redirect(req.user.url);
-   }
-}))
-
-//MAIN PAGE DISPLAY FOR LOGGED ACCOUNTS
-router.get('/:id', asyncHandler (async (req,res)=> {
-    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
-    res.render('techy-blog', {
-        user: res.locals.currentUser,
-        posts: posts
-    })
-
-}))
 
 router.post('/sign-up',[
     body('firstname')
@@ -165,5 +84,86 @@ router.post('/sign-up',[
         }
     })    
 ])
+
+// WRITING POST (BLOG AUTHOR)
+router.get('/:user/write-post', (req,res)=> {
+    res.render('post-write', {user: res.locals.currentUser})
+})
+
+router.post('/:user/write-post', asyncHandler(async (req,res)=> {
+    const post = new Post({
+        title: req.body.title,
+        timestamp: Date.now(),
+        body: req.body.message,
+        userId: res.locals.currentUser._id
+    })
+    await post.save();
+    res.redirect(req.user.url)
+}))
+
+// UPDATE POST
+router.get('/:user/update-post/:postId', asyncHandler(async (req,res) =>{
+    const post = await Post.findById(req.params.postId).exec();
+    res.render('post-update', {
+        post: post,
+        err: ''
+    })
+}))
+
+router.post('/:user/update-post/:postId', [
+    body('title').isLength({max: 500})
+        .withMessage('Character for title exceeded the limit'),
+    body('message').isLength({max: 7000})
+        .withMessage('Character for your message exceeded the limit (7000 characters)'),
+    asyncHandler(async(req,res)=>{
+        const err = validationResult(req);
+        if((Object.entries(req.body)[2][0]) === 'cancel-btn'){
+            res.redirect(req.user.url);
+        }
+        if((Object.entries(req.body)[2][0]) === 'update-btn'){
+            if(!err.isEmpty()){
+                res.render('post-update',{
+                    err: err.array(),
+                    postLength: Object.keys(req.body.message).length
+                })
+                return;
+            }else{
+                await Post.updateOne({_id: req.params.id}, {$set:{
+                    title: req.body.title,
+                    body: req.body.message,
+                    isUpdated: true,
+                    updatedTimestamp: Date.now(),
+                    userIdUpdated: res.locals.currentUser._id
+                }}) 
+                res.redirect(req.user.url);    
+            }
+        }
+    })
+])
+
+// DELETE POST
+router.get('/:user/delete-post/:postId', (req,res) =>{
+    res.render('post-delete', {user: res.locals.currentUser})
+})
+
+router.post('/:user/delete-post/:postId', asyncHandler(async (req,res) => {
+    if((Object.entries(req.body)[0][0]) === 'yes-btn'){
+        await Post.findByIdAndDelete(req.params.postId)
+        res.redirect(req.user.url);
+   }
+   if((Object.entries(req.body)[0][0]) === 'no-btn'){
+        res.redirect(req.user.url);
+   }
+}))
+
+//MAIN PAGE DISPLAY FOR LOGGED ACCOUNTS
+router.get('/:user', asyncHandler (async (req,res)=> {
+    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
+    res.render('techy-blog', {
+        user: res.locals.currentUser,
+        posts: posts
+    })
+
+}))
 
 module.exports = router;

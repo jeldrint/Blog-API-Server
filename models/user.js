@@ -10,7 +10,7 @@ const UserSchema = new Schema({
 })
 
 UserSchema.virtual('url').get(function (){
-    return `/techy-blog/${this._id}`
+    return `/techy-blog/${this.user_name}`
 })
 
 module.exports = mongoose.model('Users', UserSchema)

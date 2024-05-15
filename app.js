@@ -65,7 +65,8 @@ app.post('/techy-blog/log-in',
         failureRedirect: '/techy-blog/log-in',
     }), (req,res) => {
         const user = new User({
-            _id: req.user._id
+            _id: req.user._id,
+            user_name: req.user.user_name
         })
         res.redirect(user.url);
     }
