@@ -7,4 +7,13 @@ const CommentSchema = new Schema({
     timestamp: {type: Date, required: true} 
 })
 
+PostSchema.virtual('timestamp_formatted').get(function () {
+    if(DateTime.fromJSDate(this.timestamp).isValid){
+        return DateTime.fromJSDate(this.timestamp).toLocaleString(DateTime.DATETIME_FULL)
+    }else{
+        return 'N/A'
+    }
+})
+
+
 module.exports = mongoose.model('Comments', CommentSchema);
