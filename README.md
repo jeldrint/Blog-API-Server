@@ -66,10 +66,13 @@ May 12 - May 18
     - cleaning up the code, cleaning up the update button (60% done, functional)
         - update is now clean, i put express validator to not accept messages beyond 7000 words
         - tidying up the url, adding two parameters
-    - working on comments (part 1: conceptualizing)
+    - working on comments (part 1: conceptualizing) 
         - ☑️when in public, there is a comment button, which will redirect you to log in
 
 * May 16
     - working on comments (part 2)
         - when clicking the add a comment button, it will alternate display with a 'mini form'
         - stuck at the button onclick in ejs
+
+* May 17
+    - i think I need to incorporate reactjs na. I have some problems with the EJS regarding the buttons. (currently implementing vite+reactjs)
