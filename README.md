@@ -45,10 +45,7 @@ May 12 - May 18
 * Let's make the Blog Author account
     - view post  (also for common account) ☑️
     - create/ edit / delete post ☑️
-    - comments (also for common account)
-    - published / unpublished posts
-        * unpublished posts can be viewed by the blog authors?
-        * published posts can be viewed by common accounts as well as the public
+    - merging this one with front end. need two other repos according to the project
 
 * May 12 - 13
     - can create post now (Blog Author account) 
@@ -76,3 +73,14 @@ May 12 - May 18
 
 * May 17
     - i think I need to incorporate reactjs na. I have some problems with the EJS regarding the buttons. (currently implementing vite+reactjs)
+
+* May 18
+    - need gumawa ng 2 separate repos for the front end. first time ko ito gawin soo
+
+
+May 19 - 26
+-   
+    - comments (also for common account)
+    - published / unpublished posts
+        * unpublished posts can be viewed by the blog authors?
+        * published posts can be viewed by common accounts as well as the public
