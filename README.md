@@ -80,7 +80,7 @@ May 12 - May 18
 
 May 19 - 26
 -   
-    - comments (also for common account)
-    - published / unpublished posts
+    * comments (also for common account)
+    * published / unpublished posts
         * unpublished posts can be viewed by the blog authors?
         * published posts can be viewed by common accounts as well as the public
