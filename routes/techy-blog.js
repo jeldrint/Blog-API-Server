@@ -18,6 +18,15 @@ router.get('/', asyncHandler(async (req,res) => {
     })
 }))
 
+router.get('/api', asyncHandler(async (req,res) => {
+    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
+    res.json({
+        user: res.locals.currentUser,
+        posts: posts
+    })
+}))
+
+
 router.get('/log-in', (req,res)=> {
     res.render('log-in', {user: res.locals.currentUser})
 })
