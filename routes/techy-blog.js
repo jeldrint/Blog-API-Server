@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();
+const passport = require('passport');
 
 const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
@@ -18,19 +19,24 @@ router.get('/', asyncHandler(async (req,res) => {
     })
 }))
 
-router.get('/api', asyncHandler(async (req,res) => {
-    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
-    res.json({
-        user: res.locals.currentUser,
-        posts: posts
-    })
-}))
-
-
+//LOG-IN
 router.get('/log-in', (req,res)=> {
     res.render('log-in', {user: res.locals.currentUser})
 })
 
+router.post('/log-in',
+    passport.authenticate('local', {
+        failureRedirect: '/techy-blog/log-in',
+    }), (req,res) => {
+        const user = new User({
+            _id: req.user._id,
+            user_name: req.user.user_name
+        })
+        res.redirect(user.url);
+    }
+)
+
+//LOG-OUT
 router.get('/log-out',(req,res,next)=>{
     req.logOut((err)=>{
         if(err){

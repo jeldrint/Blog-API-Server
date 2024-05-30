@@ -11,6 +11,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('./models/user')
 const indexRoute = require('./routes/index');
 const techyBlogRoute = require('./routes/techy-blog')
+const apiRoute = require('./routes/api')
 
 //ENV
 require('dotenv').config();
@@ -25,6 +26,7 @@ db.on('error',console.error.bind(console, 'mongoDB connection error'));
 const app = express();
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
 
 //PASSPORT LOCAL STRATEGY FOR LOGIN
 passport.use(
@@ -51,6 +53,7 @@ passport.deserializeUser(asyncHandler(async (id, done)=>{
     done(null, user);
 }))
 
+
 //MIDDLEWARES (MAIN)
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
@@ -60,18 +63,6 @@ app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.post('/techy-blog/log-in',
-    passport.authenticate('local', {
-        failureRedirect: '/techy-blog/log-in',
-    }), (req,res) => {
-        const user = new User({
-            _id: req.user._id,
-            user_name: req.user.user_name
-        })
-        res.redirect(user.url);
-    }
-)
-
 //saving the current user data
 app.use((req,res,next) => {
     res.locals.currentUser = req.user;
@@ -80,6 +71,7 @@ app.use((req,res,next) => {
 
 //ROUTES
 app.use('/', indexRoute)
+app.use('/techy-blog/api', apiRoute)
 app.use('/techy-blog', techyBlogRoute)
 
 //PORT CONNECT
