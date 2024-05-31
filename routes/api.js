@@ -10,7 +10,7 @@ const User = require('../models/user')
 router.get('/', asyncHandler(async (req,res) => {
     const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
     res.json({
-        user: res.locals.currentUser,
+        user: req.user,
         posts: posts
     })
 }))
@@ -19,6 +19,7 @@ router.get('/', asyncHandler(async (req,res) => {
 router.post('/log-in',
     passport.authenticate('local', {
         failureRedirect: '/techy-blog/log-in',
+        failureMessage: true,
     }), (req,res) => {
         const user = new User({
             _id: req.user._id,
