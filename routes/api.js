@@ -8,7 +8,7 @@ const User = require('../models/user')
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
     const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
-    res.json({
+    return res.json({
         user: req.user,
         posts: posts
     })
