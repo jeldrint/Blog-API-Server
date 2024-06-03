@@ -3,7 +3,6 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const Post = require('../models/post')
 const passport = require('passport')
-const User = require('../models/user')
 
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
@@ -23,8 +22,7 @@ router.post('/log-in', (req,res,next) => {
         }
         if(!authUser){
             return res.json({
-                login: 'failed',
-                message: 'sign in failed'
+                status: 'log in failed',
             }) 
         }else{
             req.logIn(authUser, (err)=>{
@@ -32,7 +30,7 @@ router.post('/log-in', (req,res,next) => {
                     return res.json(err)
                 }else{
                     return res.json({
-                        login: 'success',
+                        status: 'logged in',
                         message: 'Logged in successfully'
                     })            
                 }
@@ -40,5 +38,19 @@ router.post('/log-in', (req,res,next) => {
         }
     })(req,res)
 })
+
+//LOG-OUT
+router.get('/log-out',(req,res,next)=>{
+    req.logOut((err)=>{
+        if(err){
+            return next(err)
+        }
+    })
+    return res.json({
+        status: 'logged out',
+        message: 'Logged out successfully'
+    })
+})
+
 
 module.exports = router;
