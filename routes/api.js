@@ -63,18 +63,18 @@ router.post('/sign-up',[
     body('firstname')
         .trim().isLength({min: 1}).escape().withMessage('First name is empty')
         .matches(/^[a-zA-Z ]*$/)
-        .withMessage('Name must consist of alphabet letters only'),
+        .withMessage('First Name must consist of alphabet letters only'),
     body('lastname')
         .trim().isLength({min: 1}).escape().withMessage('Family name is empty')
         .matches(/^[a-zA-Z ]*$/)
-        .withMessage('Name must consist of alphabet letters only'),
+        .withMessage('Last Name must consist of alphabet letters only'),
     body('username')
         .trim().isLength({min: 7}).escape()
-        .withMessage('Username must be 7 characters long')
+        .withMessage('User Name must be 7 characters long')
         .custom(async value => {
             const user = await User.findOne({user_name: value}).exec()
             if (user){
-                throw new Error('Username already exists')
+                throw new Error('User Name already exists')
             }
         }),
     body('password')
