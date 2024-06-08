@@ -112,7 +112,37 @@ router.post('/sign-up',[
                 }
             })
         }
-    })    
+    })
+])
+
+
+// WRITING POST (BLOG AUTHOR)
+router.post('/write-post', [
+    body('title').isLength({max: 200})
+        .withMessage('Character for title exceeded the limit (200)'),
+    body('message').isLength({max: 7000})
+        .withMessage('Character for your message exceeded the limit (7000 characters)'),
+    
+    asyncHandler(async (req,res)=> {
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return res.json({
+                errors: errors.array()
+            })
+        }else{
+            const post = new Post({
+                title: req.body.title,
+                timestamp: Date.now(),
+                body: req.body.message,
+                userId: req.user._id
+            })
+            await post.save();
+            return res.json({
+                success: 'Post is successfully written!'
+            })    
+        }
+    })
 ])
 
 
