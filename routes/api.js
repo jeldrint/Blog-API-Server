@@ -154,25 +154,25 @@ router.post('/update-post', [
     
     asyncHandler(async (req,res)=> {
         const errors = validationResult(req);
+        console.log(req.body)
 
         if(!errors.isEmpty()){
             return res.json({
                 errors: errors.array()
             })
         }else{
-            const post = new Post({
+            await Post.updateOne({_id: req.body.postId}, {$set:{
                 title: req.body.title,
-                timestamp: Date.now(),
                 body: req.body.message,
-                userId: req.user._id
-            })
-            await post.save();
+                isUpdated: true,
+                updatedTimestamp: Date.now(),
+                userIdUpdated: req.body.userId
+            }}) 
             return res.json({
-                success: 'Post is successfully written!'
+                success: 'Post is successfully updated!'
             })    
         }
     })
 ])
-
 
 module.exports = router;
