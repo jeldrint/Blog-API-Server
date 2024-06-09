@@ -154,7 +154,6 @@ router.post('/update-post', [
     
     asyncHandler(async (req,res)=> {
         const errors = validationResult(req);
-        console.log(req.body)
 
         if(!errors.isEmpty()){
             return res.json({
@@ -174,5 +173,21 @@ router.post('/update-post', [
         }
     })
 ])
+
+// DELETE POST (ADMIN)
+router.post('/delete-post', asyncHandler(async (req,res) => {
+    try{
+        await Post.findByIdAndDelete(req.body.postId)
+    }catch(err){
+        return res.json({
+            error: 'Error in deleting this post!'
+        })
+    }
+    return res.json({
+        success: 'Post is successfully deleted!'
+    })
+
+}))
+
 
 module.exports = router;
