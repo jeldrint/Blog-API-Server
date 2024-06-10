@@ -9,6 +9,8 @@ const User = require('../models/user')
 require('dotenv').config();
 const {body, validationResult} = require('express-validator');
 
+const Comment = require('../models/comment')
+
 
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
@@ -115,7 +117,6 @@ router.post('/sign-up',[
     })
 ])
 
-
 // WRITING POST (ADMIN)
 router.post('/write-post', [
     body('title').isLength({max: 200})
@@ -135,7 +136,7 @@ router.post('/write-post', [
                 title: req.body.title,
                 timestamp: Date.now(),
                 body: req.body.message,
-                userId: req.user._id
+                userId: req.body.userId
             })
             await post.save();
             return res.json({
@@ -189,5 +190,30 @@ router.post('/delete-post', asyncHandler(async (req,res) => {
 
 }))
 
+
+// COMMENT (ADMIN)
+router.post('/write-comment', [
+    body('comment').isLength({max: 1000})
+        .withMessage('Character for title exceeded the limit (1000)'),    
+    asyncHandler(async (req,res)=> {
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+            return res.json({
+                errors: errors.array()
+            })
+        }else{
+            const comment = new Comment({
+                comment: req.body.comment,
+                timestamp: Date.now(),
+                userId: req.body.userId
+            })
+            await comment.save();
+            return res.json({
+                success: 'Commented successfully!'
+            })    
+        }
+    })
+])
 
 module.exports = router;
