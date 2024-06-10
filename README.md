@@ -13,11 +13,11 @@ Apr 30
 
 May 4 - May 9
 - 
-* need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
+    * need natin ng frontend para sa presentation. For example yung pagkakalagay ng Title, Header, Body, tapos yung different types of fonts, etc.☑️
 
-* I tried connecting to mongoDB, in a cluster, but with a different databases. and I have to specify which database should I connnect to.☑️
+    * I tried connecting to mongoDB, in a cluster, but with a different databases. and I have to specify which database should I connnect to.☑️
 
-* Sign up for regular accounts☑️
+    * Sign up for regular accounts☑️
 
 May 6
 * Logging in as the admin / blog author☑️
@@ -44,10 +44,10 @@ May 11
 
 May 12 - May 18
 - 
-* Let's make the Blog Author account
-    - view post  (also for common account) ☑️
-    - create/ edit / delete post ☑️
-    - merging this one with front end. need two other repos according to the project
+    * Let's make the Blog Author account
+        - view post  (also for common account) ☑️
+        - create/ edit / delete post ☑️
+        - merging this one with front end. need two other repos according to the project
 
 * May 12 - 13
     - can create post now (Blog Author account) 
