@@ -96,3 +96,12 @@ May 19 - 26
 
 * May 26
     * main page of the blog is now rendering initially in React
+
+
+June 10 - June 16
+- 
+    * Let's work on comments
+
+* June 10
+    * Working on comments
+        - Written my first comment ☑️
