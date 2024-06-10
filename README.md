@@ -7,10 +7,6 @@ npm install bcryptjs express-async-handler express-validator
 
 npm install passport-jwt jsonwebtoken
 
-
-# Blog-API
- Blog API, major project from The Odin Project
-
 Apr 30
 - 
 * Initial plans / and initial repo
