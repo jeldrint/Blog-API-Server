@@ -15,9 +15,11 @@ const Comment = require('../models/comment')
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
     const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
+    const comments = await Comment.find().populate('userId').populate('postId', 'id title').exec();
     return res.json({
         user: req.user,
-        posts: posts
+        posts: posts,
+        comments: comments
     })
 }))
 
@@ -206,7 +208,8 @@ router.post('/write-comment', [
             const comment = new Comment({
                 comment: req.body.comment,
                 timestamp: Date.now(),
-                userId: req.body.userId
+                userId: req.body.userId,
+                postId: req.body.postId
             })
             await comment.save();
             return res.json({

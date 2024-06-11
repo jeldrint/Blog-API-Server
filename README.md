@@ -105,3 +105,6 @@ June 10 - June 16
 * June 10
     * Working on comments
         - Written my first comment ☑️
+
+* June 11
+    * can write and display comment now (initial)
