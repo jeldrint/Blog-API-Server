@@ -192,9 +192,19 @@ router.post('/delete-post', asyncHandler(async (req,res) => {
 
 }))
 
+// COMMENTS (ADMIN)
+/* router.get('/comments', async (req,res) => {
+    try{
+        const comments = await Comment.find().populate('userId').populate('postId', 'id title').exec();
+        return res.json({comments: comments})
+    }catch(error){
+        return res.json({error: 'Error in fetching comments'})
+    }
 
-// COMMENT (ADMIN)
-router.post('/write-comment', [
+}); */
+
+
+router.post('/comments', [
     body('comment').isLength({max: 1000})
         .withMessage('Character for title exceeded the limit (1000)'),    
     asyncHandler(async (req,res)=> {
@@ -207,7 +217,7 @@ router.post('/write-comment', [
         }else{
             const comment = new Comment({
                 comment: req.body.comment,
-                timestamp: Date.now(),
+                timestamp: req.body.date,
                 userId: req.body.userId,
                 postId: req.body.postId
             })
@@ -218,5 +228,7 @@ router.post('/write-comment', [
         }
     })
 ])
+
+
 
 module.exports = router;
