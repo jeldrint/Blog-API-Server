@@ -217,7 +217,7 @@ router.post('/comments', [
         }else{
             const comment = new Comment({
                 comment: req.body.comment,
-                timestamp: req.body.date,
+                timestamp: req.body.timestamp,
                 userId: req.body.userId,
                 postId: req.body.postId
             })
