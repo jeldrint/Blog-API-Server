@@ -8,11 +8,13 @@ const PostSchema = new Schema({
     body: {type: String, required: true, maxLength: 7000},
     userId: {type: Schema.Types.ObjectId, ref: 'Users'},
     comments: {type: Schema.Types.ObjectId, ref: 'Comments'},
- 
+
     //For Updated Posts
     isUpdated: {type: Boolean, default: false},
     updatedTimestamp: {type: Date},
     userIdUpdated: {type: Schema.Types.ObjectId, ref: 'Users'},
+
+    isPublished: {type: Boolean, default: true}
 })
 
 PostSchema.virtual('timestamp_formatted').get(function () {
