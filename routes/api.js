@@ -14,7 +14,7 @@ const Comment = require('../models/comment')
 
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
-    const posts = await Post.find().populate('userId').populate('userIdUpdated').exec();
+    const posts = await Post.find().populate('userId').populate('userIdUpdated').sort({timestamp: -1}).exec();
     const comments = await Comment.find().populate('userId').populate('postId', 'id title').exec();
     return res.json({
         user: req.user,
@@ -193,17 +193,6 @@ router.post('/delete-post', asyncHandler(async (req,res) => {
 }))
 
 // COMMENTS (ADMIN)
-/* router.get('/comments', async (req,res) => {
-    try{
-        const comments = await Comment.find().populate('userId').populate('postId', 'id title').exec();
-        return res.json({comments: comments})
-    }catch(error){
-        return res.json({error: 'Error in fetching comments'})
-    }
-
-}); */
-
-
 router.post('/comments', [
     body('comment').isLength({max: 1000})
         .withMessage('Character for title exceeded the limit (1000)'),    
@@ -228,6 +217,24 @@ router.post('/comments', [
         }
     })
 ])
+
+//DELETE COMMENTS (ADMIN)
+router.post('/delete-comment', asyncHandler(async (req,res) => {
+    try{
+        await Comment.findByIdAndDelete(req.body.commentId)
+    }catch(err){
+        return res.json({
+            error: 'Error in deleting this comment!'
+        })
+    }
+    return res.json({
+        success: 'Comment is successfully deleted!'
+    })
+
+}))
+
+
+
 
 
 
