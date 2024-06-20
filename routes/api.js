@@ -234,6 +234,24 @@ router.post('/delete-comment', asyncHandler(async (req,res) => {
 }))
 
 
+//SET POST TO BE PUBLISHED/ UNPUBLISHED
+router.post('/publish-post', asyncHandler(async (req,res)=> {
+    const errors = validationResult(req);
+    //console.log(req.body)
+
+    if(!errors.isEmpty()){
+        return res.json({
+            errors: errors.array()
+        })
+    }else{
+        await Post.updateOne({_id: req.body.postId}, {$set:{
+            isPublished: req.body.isPostPublished,
+        }}) 
+        return res.json({
+            success: 'Post is successfully updated!'
+        })    
+    }
+}))
 
 
 
