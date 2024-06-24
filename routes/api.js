@@ -163,7 +163,7 @@ router.post('/write-post', [
                 if(err){
                     res.json({
                         error: err,
-                        message: 'error in jwt'
+                        message: 'error in jwt (Write Post)'
                     })
                 }else{
                     const post = new Post({
@@ -190,6 +190,7 @@ router.post('/update-post', [
         .withMessage('Character for title exceeded the limit (200)'),
     body('message').isLength({max: 7000})
         .withMessage('Character for your message exceeded the limit (7000 characters)'),
+    verifyToken,
     
     asyncHandler(async (req,res)=> {
         const errors = validationResult(req);
@@ -199,32 +200,54 @@ router.post('/update-post', [
                 errors: errors.array()
             })
         }else{
-            await Post.updateOne({_id: req.body.postId}, {$set:{
-                title: req.body.title,
-                body: req.body.message,
-                isUpdated: true,
-                updatedTimestamp: Date.now(),
-                userIdUpdated: req.body.userId
-            }}) 
-            return res.json({
-                success: 'Post is successfully updated!'
-            })    
+            jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+                if(err){
+                    res.json({
+                        error: err,
+                        message: 'error in jwt (Update Post)'
+                    })
+                }else{
+                    await Post.updateOne({_id: req.body.postId}, {$set:{
+                        title: req.body.title,
+                        body: req.body.message,
+                        isUpdated: true,
+                        updatedTimestamp: Date.now(),
+                        userIdUpdated: req.body.userId
+                    }}) 
+                    return res.json({
+                        success: 'Post is successfully updated!',
+                        authData
+                    })
+                
+                }
+            })
         }
     })
 ])
 
 // DELETE POST (ADMIN)
-router.post('/delete-post', asyncHandler(async (req,res) => {
+router.post('/delete-post', verifyToken, asyncHandler(async (req,res) => {
     try{
-        await Post.findByIdAndDelete(req.body.postId)
+        jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+            if(err){
+                res.json({
+                    error: err,
+                    message: 'error in jwt (Update Post)'
+                })
+            }else{
+                await Post.findByIdAndDelete(req.body.postId)
+                return res.json({
+                    success: 'Post is successfully deleted!',
+                    authData
+                })
+            
+            }
+        })
     }catch(err){
         return res.json({
             error: 'Error in deleting this post!'
         })
     }
-    return res.json({
-        success: 'Post is successfully deleted!'
-    })
 
 }))
 

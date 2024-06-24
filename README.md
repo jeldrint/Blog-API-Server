@@ -108,3 +108,8 @@ June 10 - June 16
 
 * June 11
     * can write and display comment now (initial)
+
+
+* June 24
+    * JWT: given on log-in and is used in writing posts
+    * JWT implemented also in update and delete posts
