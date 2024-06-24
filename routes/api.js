@@ -11,6 +11,21 @@ const {body, validationResult} = require('express-validator');
 
 const Comment = require('../models/comment')
 
+const jwt = require('jsonwebtoken')
+
+
+const verifyToken = (req,res,next) => {
+    const token = req.headers['authorization'].split(' ')[1];
+
+    if(typeof token != 'undefined'){
+        req.token = token;
+        next();
+    }else{
+        res.json({
+            error: '403: Error in token verification 1'
+        })
+    }
+}
 
 //MAIN PAGE DISPLAY FOR PUBLIC / NOT LOGGED ACCOUNTS
 router.get('/', asyncHandler(async (req,res) => {
@@ -39,10 +54,19 @@ router.post('/log-in', (req,res,next) => {
                 if(err){
                     return res.json(err)
                 }else{
-                    return res.json({
-                        status: 'logged in',
-                        message: 'Logged in successfully'
-                    })            
+                    jwt.sign({authUser}, process.env.JWT_SECRET, (err,token) =>{
+                        if(err){
+                            res.json({
+                                error: err,
+                            })
+                        }else{
+                            return res.json({
+                                status: 'logged in',
+                                message: 'Logged in successfully',
+                                token,
+                            })
+                        }
+                    })
                 }
             })
         }
@@ -124,7 +148,8 @@ router.post('/write-post', [
     body('title').isLength({max: 200})
         .withMessage('Character for title exceeded the limit (200)'),
     body('message').isLength({max: 7000})
-        .withMessage('Character for your message exceeded the limit (7000 characters)'),
+        .withMessage('Character for your message exceeded the limit (7000 characters)')],
+    verifyToken,
     
     asyncHandler(async (req,res)=> {
         const errors = validationResult(req);
@@ -134,19 +159,30 @@ router.post('/write-post', [
                 errors: errors.array()
             })
         }else{
-            const post = new Post({
-                title: req.body.title,
-                timestamp: Date.now(),
-                body: req.body.message,
-                userId: req.body.userId
+            jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+                if(err){
+                    res.json({
+                        error: err,
+                        message: 'error in jwt'
+                    })
+                }else{
+                    const post = new Post({
+                        title: req.body.title,
+                        timestamp: Date.now(),
+                        body: req.body.message,
+                        userId: req.body.userId
+                    })
+                    await post.save();
+                    return res.json({
+                        success: 'Post is successfully written!',
+                        authData
+                    })
+                
+                }
             })
-            await post.save();
-            return res.json({
-                success: 'Post is successfully written!'
-            })    
         }
     })
-])
+)
 
 // UPDATE POST (ADMIN)
 router.post('/update-post', [
