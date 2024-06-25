@@ -56,7 +56,7 @@ router.post('/log-in', (req,res,next) => {
                 }else{
                     jwt.sign({authUser}, process.env.JWT_SECRET, (err,token) =>{
                         if(err){
-                            res.json({
+                            return res.json({
                                 error: err,
                             })
                         }else{
@@ -161,7 +161,7 @@ router.post('/write-post', [
         }else{
             jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
                 if(err){
-                    res.json({
+                    return res.json({
                         error: err,
                         message: 'error in jwt (Write Post)'
                     })
@@ -202,7 +202,7 @@ router.post('/update-post', [
         }else{
             jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
                 if(err){
-                    res.json({
+                    return res.json({
                         error: err,
                         message: 'error in jwt (Update Post)'
                     })
@@ -230,7 +230,7 @@ router.post('/delete-post', verifyToken, asyncHandler(async (req,res) => {
     try{
         jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
             if(err){
-                res.json({
+                return res.json({
                     error: err,
                     message: 'error in jwt (Update Post)'
                 })
@@ -254,7 +254,8 @@ router.post('/delete-post', verifyToken, asyncHandler(async (req,res) => {
 // COMMENTS (ADMIN)
 router.post('/comments', [
     body('comment').isLength({max: 1000})
-        .withMessage('Character for title exceeded the limit (1000)'),    
+        .withMessage('Character for title exceeded the limit (1000)'),
+    verifyToken,
     asyncHandler(async (req,res)=> {
         const errors = validationResult(req);
 
@@ -263,38 +264,57 @@ router.post('/comments', [
                 errors: errors.array()
             })
         }else{
-            const comment = new Comment({
-                comment: req.body.comment,
-                timestamp: req.body.timestamp,
-                userId: req.body.userId,
-                postId: req.body.postId
+            jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+                if(err){
+                    return res.json({
+                        error: err,
+                        message: 'error in jwt (Writing a Comment)'
+                    })
+                }else{
+                    const comment = new Comment({
+                        comment: req.body.comment,
+                        timestamp: req.body.timestamp,
+                        userId: req.body.userId,
+                        postId: req.body.postId
+                    })
+                    await comment.save();
+                    return res.json({
+                        success: 'Commented successfully!',
+                        authData
+                    })            
+                }
             })
-            await comment.save();
-            return res.json({
-                success: 'Commented successfully!'
-            })    
         }
     })
 ])
 
 //DELETE COMMENTS (ADMIN)
-router.post('/delete-comment', asyncHandler(async (req,res) => {
+router.post('/delete-comment', verifyToken, asyncHandler(async (req,res) => {
     try{
-        await Comment.findByIdAndDelete(req.body.commentId)
+        jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+            if(err){
+                return res.json({
+                    error: err,
+                    message: 'error in jwt (Writing a Comment)'
+                })
+            }else{
+                await Comment.findByIdAndDelete(req.body.commentId)
+                return res.json({
+                    success: 'Comment is successfully deleted!',
+                    authData
+                })            
+            }
+        })
     }catch(err){
         return res.json({
             error: 'Error in deleting this comment!'
         })
     }
-    return res.json({
-        success: 'Comment is successfully deleted!'
-    })
-
 }))
 
 
 //SET POST TO BE PUBLISHED/ UNPUBLISHED
-router.post('/publish-post', asyncHandler(async (req,res)=> {
+router.post('/publish-post', verifyToken, asyncHandler(async (req,res)=> {
     const errors = validationResult(req);
     //console.log(req.body)
 
@@ -303,16 +323,24 @@ router.post('/publish-post', asyncHandler(async (req,res)=> {
             errors: errors.array()
         })
     }else{
-        await Post.updateOne({_id: req.body.postId}, {$set:{
-            isPublished: req.body.isPostPublished,
-        }}) 
-        return res.json({
-            success: 'Post is successfully updated!'
-        })    
+        jwt.verify(req.token, process.env.JWT_SECRET, async (err,authData)=> {
+            if(err){
+                res.json({
+                    error: err,
+                    message: 'error in jwt (Publish Post)'
+                })
+            }else{
+                await Post.updateOne({_id: req.body.postId}, {$set:{
+                    isPublished: req.body.isPostPublished,
+                }}) 
+                return res.json({
+                    success: 'Post is successfully updated!',
+                    authData
+                })    
+            
+            }
+        })
     }
 }))
-
-
-
 
 module.exports = router;
