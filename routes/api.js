@@ -232,7 +232,7 @@ router.post('/delete-post', verifyToken, asyncHandler(async (req,res) => {
             if(err){
                 return res.json({
                     error: err,
-                    message: 'error in jwt (Update Post)'
+                    message: 'error in jwt (Delete Post)'
                 })
             }else{
                 await Post.findByIdAndDelete(req.body.postId)
@@ -295,14 +295,21 @@ router.post('/delete-comment', verifyToken, asyncHandler(async (req,res) => {
             if(err){
                 return res.json({
                     error: err,
-                    message: 'error in jwt (Writing a Comment)'
+                    message: 'error in jwt (Deleting a Comment)'
                 })
             }else{
-                await Comment.findByIdAndDelete(req.body.commentId)
-                return res.json({
-                    success: 'Comment is successfully deleted!',
-                    authData
-                })            
+                const deletedComment = await Comment.findByIdAndDelete(req.body.commentId);
+                if(deletedComment){
+                    return res.json({
+                        success: 'Comment is successfully deleted!',
+                        authData
+                    })
+                }else{
+                    return res.json({
+                        errorMsg: 'There were no deleted comments',
+                        authData
+                    })
+                }
             }
         })
     }catch(err){
