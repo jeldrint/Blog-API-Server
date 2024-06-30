@@ -277,9 +277,12 @@ router.post('/comments', [
                         userId: req.body.userId,
                         postId: req.body.postId
                     })
-                    await comment.save();
+                    const commentOldInfo = await comment.save()
+                    const commentNewInfo = await Comment.findById(commentOldInfo.id).populate('userId').populate('postId').exec();
+        
                     return res.json({
                         success: 'Commented successfully!',
+                        commentNewInfo,
                         authData
                     })            
                 }

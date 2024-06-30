@@ -113,3 +113,8 @@ June 10 - June 16
 * June 24
     * JWT: given on log-in and is used in writing posts
     * JWT implemented also in update and delete posts
+
+* June 30
+    * Bug in submitting and deleting comment now fixed
+        - doesn't need to render the App component just to manipulate the comments 
+        - i need to do some work around the api.js in order to solve the bug
