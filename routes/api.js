@@ -63,6 +63,7 @@ router.post('/log-in', (req,res,next) => {
                             return res.json({
                                 status: 'logged in',
                                 message: 'Logged in successfully',
+                                authUser,
                                 token,
                             })
                         }
