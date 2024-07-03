@@ -14,10 +14,6 @@ const techyBlogRoute = require('./routes/techy-blog')
 const apiRoute = require('./routes/api')
 
 const cors = require('cors')
-const corsOpts = {
-    origin: 'https://blog-api-server-26kg.onrender.com',
-    optionsSuccessStatus: 200
-}
 
 //ENV
 require('dotenv').config();
@@ -62,8 +58,7 @@ passport.deserializeUser(asyncHandler(async (id, done)=>{
 //MIDDLEWARES (MAIN)
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
-app.use(cors(corsOpts));
-//app.options('*', cors(corsOpts))
+app.use(cors());
 
 //MIDDLEWARES (PASSPORT AND EXPRESS SESSION)
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: true}));
