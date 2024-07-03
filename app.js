@@ -15,7 +15,7 @@ const apiRoute = require('./routes/api')
 
 const cors = require('cors')
 const corsOpts = {
-    origin: 'https://blog-api-server-26kg.onrender.com/',
+    origin: 'https://blog-api-server-26kg.onrender.com',
     optionsSuccessStatus: 200
 }
 
