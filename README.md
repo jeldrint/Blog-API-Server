@@ -7,4 +7,4 @@ npm install bcryptjs express-async-handler express-validator
 
 npm install passport-jwt jsonwebtoken
 
-👉 See it live <a href="https://blog-api-server-production-7657.up.railway.app">here</a>
+👉 See it live <a href="https://blog-api-server-production-0d8e.up.railway.app">here</a>
