@@ -236,7 +236,23 @@ router.post('/delete-post', verifyToken, asyncHandler(async (req,res) => {
                     message: 'error in jwt (Delete Post)'
                 })
             }else{
-                await Post.findByIdAndDelete(req.body.postId)
+                try{
+                    await Comment.deleteMany({postId: req.body.postId})
+                }catch(error){
+                    return res.json({
+                        error: error,
+                        message: 'error in deleting the comments of the post'    
+                    })
+                }
+
+                try{
+                    await Post.findByIdAndDelete(req.body.postId)
+                }catch(error){
+                    return res.json({
+                        error: error,
+                        message: 'error in deleting the post'    
+                    })
+                }
                 return res.json({
                     success: 'Post is successfully deleted!',
                     authData
